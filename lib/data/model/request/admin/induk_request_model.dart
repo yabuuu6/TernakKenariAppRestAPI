@@ -1,46 +1,46 @@
 import 'dart:convert';
 
-class AnakRequestModel {
+class IndukRequestModel {
+  final int? adminId;
   final String? noRing;
   final String? tanggalLahir;
   final String? jenisKelamin;
   final String? jenisKenari;
-  final String? gambarAnak;
-  final String? ayahNoRing;
-  final String? ibuNoRing;
+  final String? keterangan;
+  final String? gambarInduk;
 
-  AnakRequestModel({
+  IndukRequestModel({
+    this.adminId,
     this.noRing,
     this.tanggalLahir,
     this.jenisKelamin,
     this.jenisKenari,
-    this.gambarAnak,
-    this.ayahNoRing,
-    this.ibuNoRing,
+    this.keterangan,
+    this.gambarInduk,
   });
 
-  factory AnakRequestModel.fromJson(String str) =>
-      AnakRequestModel.fromMap(json.decode(str));
+  factory IndukRequestModel.fromJson(String str) => 
+      IndukRequestModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory AnakRequestModel.fromMap(Map<String, dynamic> json) => AnakRequestModel(
+  factory IndukRequestModel.fromMap(Map<String, dynamic> json) => IndukRequestModel(
+        adminId: json["admin_id"],
         noRing: json["no_ring"],
         tanggalLahir: json["tanggal_lahir"],
         jenisKelamin: json["jenis_kelamin"],
         jenisKenari: json["jenis_kenari"],
-        gambarAnak: json["gambar_anak"],
-        ayahNoRing: json["ayah_no_ring"],
-        ibuNoRing: json["ibu_no_ring"],
+        keterangan: json["keterangan"],
+        gambarInduk: json["gambar_induk"],
       );
 
   Map<String, dynamic> toMap() => {
+        "admin_id": adminId,
         "no_ring": noRing,
         "tanggal_lahir": tanggalLahir,
         "jenis_kelamin": jenisKelamin,
         "jenis_kenari": jenisKenari,
-        "gambar_anak": gambarAnak,
-        "ayah_no_ring": ayahNoRing,
-        "ibu_no_ring": ibuNoRing,
+        "keterangan": keterangan,
+        "gambar_induk": gambarInduk,
       };
 }
