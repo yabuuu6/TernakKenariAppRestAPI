@@ -33,5 +33,21 @@ class PostingRepository {
     }
   }
 
- 
+  Future<Either<String, GetAllBurungModel>> getAllBurung() async {
+    try {
+      final response = await _serviceHttpClient.get("admin/burung-semua");
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        final getAllBurung = GetAllBurungModel.fromMap(jsonResponse);
+
+        return Right(getAllBurung);
+      } else {
+        final jsonResponse = json.decode(response.body);
+        log("Get all burung failed: ${jsonResponse['message']}");
+        return Left(jsonResponse['message'] ?? "Get all burung failed");
+      }
+    } catch (e) {
+      return Left("An error occurred while getting all burung: $e");
+    }
+  }
 }
