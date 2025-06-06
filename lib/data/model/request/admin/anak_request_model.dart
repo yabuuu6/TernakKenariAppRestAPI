@@ -1,46 +1,77 @@
 import 'dart:convert';
 
 class AnakRequestModel {
-  final String? noRing;
-  final String? tanggalLahir;
-  final String? jenisKelamin;
-  final String? jenisKenari;
-  final String? gambarAnak;
-  final String? ayahNoRing;
-  final String? ibuNoRing;
+  final String noRing;
+  final DateTime tanggalLahir;
+  final String jenisKelamin;
+  final String jenisKenari;
+  final String keterangan;
+  final String? gambarBurung; // nullable
+  final int ayahId;
+  final int ibuId;
 
   AnakRequestModel({
-    this.noRing,
-    this.tanggalLahir,
-    this.jenisKelamin,
-    this.jenisKenari,
-    this.gambarAnak,
-    this.ayahNoRing,
-    this.ibuNoRing,
+    required this.noRing,
+    required this.tanggalLahir,
+    required this.jenisKelamin,
+    required this.jenisKenari,
+    required this.keterangan,
+    this.gambarBurung, // nullable constructor param
+    required this.ayahId,
+    required this.ibuId,
   });
 
-  factory AnakRequestModel.fromJson(String str) =>
-      AnakRequestModel.fromMap(json.decode(str));
+  AnakRequestModel copyWith({
+    String? noRing,
+    DateTime? tanggalLahir,
+    String? jenisKelamin,
+    String? jenisKenari,
+    String? keterangan,
+    String? gambarBurung,
+    int? ayahId,
+    int? ibuId,
+  }) => AnakRequestModel(
+    noRing: noRing ?? this.noRing,
+    tanggalLahir: tanggalLahir ?? this.tanggalLahir,
+    jenisKelamin: jenisKelamin ?? this.jenisKelamin,
+    jenisKenari: jenisKenari ?? this.jenisKenari,
+    keterangan: keterangan ?? this.keterangan,
+    gambarBurung: gambarBurung ?? this.gambarBurung,
+    ayahId: ayahId ?? this.ayahId,
+    ibuId: ibuId ?? this.ibuId,
+  );
 
-  String toJson() => json.encode(toMap());
+  factory AnakRequestModel.fromRawJson(String str) =>
+      AnakRequestModel.fromJson(json.decode(str));
 
-  factory AnakRequestModel.fromMap(Map<String, dynamic> json) => AnakRequestModel(
+  String toRawJson() => json.encode(toJson());
+
+  factory AnakRequestModel.fromJson(Map<String, dynamic> json) =>
+      AnakRequestModel(
         noRing: json["no_ring"],
-        tanggalLahir: json["tanggal_lahir"],
+        tanggalLahir: DateTime.parse(json["tanggal_lahir"]),
         jenisKelamin: json["jenis_kelamin"],
         jenisKenari: json["jenis_kenari"],
-        gambarAnak: json["gambar_anak"],
-        ayahNoRing: json["ayah_no_ring"],
-        ibuNoRing: json["ibu_no_ring"],
+        keterangan: json["keterangan"],
+        gambarBurung: json["gambar_burung"], // nullable, can be null
+        ayahId: json["ayah_id"],
+        ibuId: json["ibu_id"],
       );
 
-  Map<String, dynamic> toMap() => {
-        "no_ring": noRing,
-        "tanggal_lahir": tanggalLahir,
-        "jenis_kelamin": jenisKelamin,
-        "jenis_kenari": jenisKenari,
-        "gambar_anak": gambarAnak,
-        "ayah_no_ring": ayahNoRing,
-        "ibu_no_ring": ibuNoRing,
-      };
+  Map<String, dynamic> toJson() {
+    final data = {
+      "no_ring": noRing,
+      "tanggal_lahir":
+          "${tanggalLahir.year.toString().padLeft(4, '0')}-${tanggalLahir.month.toString().padLeft(2, '0')}-${tanggalLahir.day.toString().padLeft(2, '0')}",
+      "jenis_kelamin": jenisKelamin,
+      "jenis_kenari": jenisKenari,
+      "keterangan": keterangan,
+      "ayah_id": ayahId,
+      "ibu_id": ibuId,
+    };
+    if (gambarBurung != null) {
+      data["gambar_burung"] = gambarBurung!;
+    }
+    return data;
+  }
 }

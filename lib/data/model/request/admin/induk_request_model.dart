@@ -1,46 +1,60 @@
 import 'dart:convert';
 
 class IndukRequestModel {
-  final int? adminId;
-  final String? noRing;
-  final String? tanggalLahir;
-  final String? jenisKelamin;
-  final String? jenisKenari;
-  final String? keterangan;
-  final String? gambarInduk;
+  final String noRing;
+  final DateTime tanggalLahir;
+  final String jenisKelamin;
+  final String jenisKenari;
+  final String keterangan;
+  final String? gambarBurung;
 
   IndukRequestModel({
-    this.adminId,
-    this.noRing,
-    this.tanggalLahir,
-    this.jenisKelamin,
-    this.jenisKenari,
-    this.keterangan,
-    this.gambarInduk,
+    required this.noRing,
+    required this.tanggalLahir,
+    required this.jenisKelamin,
+    required this.jenisKenari,
+    required this.keterangan,
+    this.gambarBurung, 
   });
 
-  factory IndukRequestModel.fromJson(String str) => 
-      IndukRequestModel.fromMap(json.decode(str));
+  IndukRequestModel copyWith({
+    String? noRing,
+    DateTime? tanggalLahir,
+    String? jenisKelamin,
+    String? jenisKenari,
+    String? keterangan,
+    String? gambarBurung,
+  }) => IndukRequestModel(
+    noRing: noRing ?? this.noRing,
+    tanggalLahir: tanggalLahir ?? this.tanggalLahir,
+    jenisKelamin: jenisKelamin ?? this.jenisKelamin,
+    jenisKenari: jenisKenari ?? this.jenisKenari,
+    keterangan: keterangan ?? this.keterangan,
+    gambarBurung: gambarBurung ?? this.gambarBurung,
+  );
 
-  String toJson() => json.encode(toMap());
+  factory IndukRequestModel.fromRawJson(String str) =>
+      IndukRequestModel.fromJson(json.decode(str));
 
-  factory IndukRequestModel.fromMap(Map<String, dynamic> json) => IndukRequestModel(
-        adminId: json["admin_id"],
+  String toRawJson() => json.encode(toJson());
+
+  factory IndukRequestModel.fromJson(Map<String, dynamic> json) =>
+      IndukRequestModel(
         noRing: json["no_ring"],
-        tanggalLahir: json["tanggal_lahir"],
+        tanggalLahir: DateTime.parse(json["tanggal_lahir"]),
         jenisKelamin: json["jenis_kelamin"],
         jenisKenari: json["jenis_kenari"],
         keterangan: json["keterangan"],
-        gambarInduk: json["gambar_induk"],
+        gambarBurung: json["gambar_burung"], // nullable, can be null
       );
 
-  Map<String, dynamic> toMap() => {
-        "admin_id": adminId,
-        "no_ring": noRing,
-        "tanggal_lahir": tanggalLahir,
-        "jenis_kelamin": jenisKelamin,
-        "jenis_kenari": jenisKenari,
-        "keterangan": keterangan,
-        "gambar_induk": gambarInduk,
-      };
+  Map<String, dynamic> toJson() => {
+    "no_ring": noRing,
+    "tanggal_lahir":
+        "${tanggalLahir.year.toString().padLeft(4, '0')}-${tanggalLahir.month.toString().padLeft(2, '0')}-${tanggalLahir.day.toString().padLeft(2, '0')}",
+    "jenis_kelamin": jenisKelamin,
+    "jenis_kenari": jenisKenari,
+    "keterangan": keterangan,
+    if (gambarBurung != null) "gambar_burung": gambarBurung,
+  };
 }
