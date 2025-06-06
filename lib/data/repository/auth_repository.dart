@@ -45,7 +45,7 @@ class AuthRepository {
   }
 
   Future<Either<String, String>> register(
-   RegisterRequsetModel requestModel,
+   RegisterRequestModel requestModel,
   ) async {
     try {
       final response = await _serviceHttpClient.post(

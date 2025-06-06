@@ -140,7 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ? null
                           : () {
                               if (_key.currentState!.validate()) {
-                                final request = RegisterRequsetModel(
+                                final request = RegisterRequestModel(
                                   username: namaController.text,
                                   email: emailController.text,
                                   password: passwordController.text,

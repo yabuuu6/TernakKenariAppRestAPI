@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-class RegisterRequsetModel {
+class RegisterRequestModel {
     final String? username;
     final String? email;
     final String? password;
     final String? passwordConfirmation;
     final int? roleId;
 
-    RegisterRequsetModel({
+    RegisterRequestModel({
         this.username,
         this.email,
         this.password,
@@ -15,11 +15,11 @@ class RegisterRequsetModel {
         this.roleId,
     });
 
-    factory RegisterRequsetModel.fromJson(String str) => RegisterRequsetModel.fromMap(json.decode(str));
+    factory RegisterRequestModel.fromJson(String str) => RegisterRequestModel.fromMap(json.decode(str));
 
     String toJson() => json.encode(toMap());
 
-    factory RegisterRequsetModel.fromMap(Map<String, dynamic> json) => RegisterRequsetModel(
+    factory RegisterRequestModel.fromMap(Map<String, dynamic> json) => RegisterRequestModel(
         username: json["username"],
         email: json["email"],
         password: json["password"],

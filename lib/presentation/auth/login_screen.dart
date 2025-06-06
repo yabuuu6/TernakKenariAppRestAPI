@@ -5,6 +5,7 @@ import 'package:canary_template/core/components/spaces.dart';
 import 'package:canary_template/core/constants/colors.dart';
 import 'package:canary_template/core/core.dart';
 import 'package:canary_template/presentation/auth/bloc/login/login_bloc.dart';
+import 'package:canary_template/presentation/auth/register_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
