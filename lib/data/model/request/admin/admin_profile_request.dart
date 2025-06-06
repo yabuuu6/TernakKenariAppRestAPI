@@ -15,6 +15,8 @@ class AdminProfileResponseModel {
         name: json["name"],
     );
 
+  get message => null;
+
     Map<String, dynamic> toMap() => {
         "name": name,
     };

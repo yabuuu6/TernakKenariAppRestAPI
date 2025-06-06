@@ -48,4 +48,6 @@ Future<http.Response> get(String endPoint) async {
     throw Exception("Get request failed: $e");
   }
 }
+
+  Future postWithToken(String s, Map<String, dynamic> map) async {}
 } 
