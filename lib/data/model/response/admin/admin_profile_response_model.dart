@@ -46,6 +46,10 @@ class Data {
         name: json["name"],
     );
 
+  get address => null;
+
+  get phone => null;
+
     Map<String, dynamic> toMap() => {
         "id": id,
         "name": name,
