@@ -26,5 +26,19 @@ class GetAllBurungModel {
 
   String toJson() => json.encode(toMap());
 
-  
+  factory GetAllBurungModel.fromMap(Map<String, dynamic> json) =>
+      GetAllBurungModel(
+        message: json["message"],
+        statusCode: json["status_code"],
+        data: List<GetAllBurung>.from(
+          json["data"].map((x) => GetAllBurung.fromMap(x)),
+        ),
+      );
+
+  Map<String, dynamic> toMap() => {
+    "message": message,
+    "status_code": statusCode,
+    "data": List<dynamic>.from(data.map((x) => x.toMap())),
+  };
 }
+
