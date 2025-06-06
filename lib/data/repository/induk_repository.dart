@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:canary_template/data/model/request/admin/induk_request_model.dart';
+import 'package:canary_template/data/model/response/get_all_induk_response.dart';
 import 'package:canary_template/service/service_http_client.dart';
 import 'package:dartz/dartz.dart';
 
@@ -14,7 +16,7 @@ class IndukRepository {
     try {
       final response = await _serviceHttpClient.postWithToken(
         "admin/induk",
-        requestModel.toJson(),
+        requestModel.toJson() as Map<String, dynamic>,
       );
 
       if (response.statusCode == 201) {

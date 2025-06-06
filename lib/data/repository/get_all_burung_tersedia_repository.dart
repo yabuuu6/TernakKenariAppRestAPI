@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:canary_template/data/model/response/burung_semua_tersedia.dart';
 import 'package:canary_template/service/service_http_client.dart';
 import 'package:dartz/dartz.dart';
 
